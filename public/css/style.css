@@ -1,0 +1,60 @@
+/* style.css — identidade visual do Petshop */
+
+:root {
+  --petshop-primary: #4a90a4;   /* azul petróleo suave */
+  --petshop-primary-dark: #3a7385;
+  --petshop-accent: #f4a261;    /* laranja quente, contraste amigável */
+  --petshop-bg: #f7f9fa;
+  --petshop-text: #2d3436;
+}
+
+body {
+  background-color: var(--petshop-bg);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--petshop-text);
+}
+
+/* Cards de formulário (cadastro, login etc.) */
+.card {
+  border: none;
+  border-radius: 16px;
+}
+
+.card-body h1 {
+  color: var(--petshop-primary-dark);
+  font-weight: 600;
+}
+
+/* Inputs */
+.form-label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--petshop-text);
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #dfe6e9;
+  padding: 0.65rem 0.9rem;
+}
+
+.form-control:focus {
+  border-color: var(--petshop-primary);
+  box-shadow: 0 0 0 0.2rem rgba(74, 144, 164, 0.15);
+}
+
+/* Botão principal — sobrescreve o btn-primary padrão do Bootstrap */
+.btn-primary {
+  background-color: var(--petshop-primary);
+  border-color: var(--petshop-primary);
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.6rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--petshop-primary-dark);
+  border-color: var(--petshop-primary-dark);
+}

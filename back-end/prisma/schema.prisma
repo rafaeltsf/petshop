@@ -8,9 +8,16 @@ datasource db {
   provider = "mysql"
 }
 
-model User { 
+model usuarios { 
   id    Int     @id @default(autoincrement()) 
   email String  @unique
-  password String
-  name  String?
+  senha String
+  nome  String?
 } 
+
+model veterinarios {
+  id int @id @default(autoincrement())
+  nome String
+  CFMV String
+
+}
