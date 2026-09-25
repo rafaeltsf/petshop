@@ -18,6 +18,6 @@ model usuarios {
 model veterinarios {
   id int @id @default(autoincrement())
   nome String
-  CFMV String
-
+  cfmv String
+  especialidade String
 }

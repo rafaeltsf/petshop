@@ -36,4 +36,38 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+
+app.post('/api/veterinarios', async (req, res) => {
+  const { nome, cfmv, especialidade } = req.body;
+
+  if (!nome || !cfmv || !especialidade) {
+    return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
+  }
+
+  const cfmvExists = await prisma.user.findUnique({ where: { cfmv } });
+        if (cfmvExists) {
+            return res.status(400).json({ message: "CFMV já cadastrado." });
+        }
+
+        const newUser = await prisma.veterinarios.create({
+            data: { nome, cfmv, especialidade }
+        });
+
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user || user.password !== senha) {
+      return res.status(401).json({ message: 'E-mail ou senha inválidos.' });
+    }
+
+    const { password, ...usuarioSemSenha } = user;
+
+    res.json({ message: 'Login realizado com sucesso!', usuario: usuarioSemSenha });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro no servidor.' });
+  }
+});
+
 app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
