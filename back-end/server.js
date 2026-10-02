@@ -22,7 +22,7 @@ app.post('/api/login', async (req, res) => {
   try {
     const user = await prisma.user.findUnique({ where: { email } });
 
-    if (!user || user.password !== senha) {
+    if (!user || user.senha !== senha) {
       return res.status(401).json({ message: 'E-mail ou senha inválidos.' });
     }
 
@@ -82,4 +82,6 @@ app.post('/api/pets', async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000')
+});

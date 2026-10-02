@@ -43,7 +43,7 @@ form.addEventListener('submit', async (e) => {
 
     if (response.ok) {
       localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
-      window.location.href = 'dashboard.html';
+      window.location.href = './cadastro-pet.html';
     } else {
       mostrarErro(data.message || 'E-mail ou senha inválidos.');
     }

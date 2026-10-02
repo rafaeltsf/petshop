@@ -8,16 +8,27 @@ datasource db {
   provider = "mysql"
 }
 
-model usuarios { 
+model user { 
   id    Int     @id @default(autoincrement()) 
   email String  @unique
   senha String
   nome  String?
 } 
 
-model veterinarios {
-  id int @id @default(autoincrement())
+model veterinario {
+  id Int @id @default(autoincrement())
   nome String
   cfmv String
   especialidade String
+}
+
+model Pet {
+  id              Int       @id @default(autoincrement())
+  nome            String
+  especie         String
+  raca            String?
+  dataNascimento  DateTime?
+  peso            Float?
+  sexo            String?
+  observacoes     String?
 }

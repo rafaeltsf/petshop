@@ -1,8 +1,6 @@
-/* style.css — identidade visual do Petshop */
-
 :root {
-  --petshop-primary: #4a90a4;   /* azul petróleo suave */
-  --petshop-primary-dark: #3a7385;
+  --petshop-primary: #ff8800;   
+  --petshop-primary-dark: #d45901;
   --petshop-accent: #f4a261;    /* laranja quente, contraste amigável */
   --petshop-bg: #f7f9fa;
   --petshop-text: #2d3436;
@@ -14,7 +12,6 @@ body {
   color: var(--petshop-text);
 }
 
-/* Cards de formulário (cadastro, login etc.) */
 .card {
   border: none;
   border-radius: 16px;
@@ -25,7 +22,6 @@ body {
   font-weight: 600;
 }
 
-/* Inputs */
 .form-label {
   font-weight: 500;
   font-size: 0.9rem;
@@ -40,7 +36,7 @@ body {
 
 .form-control:focus {
   border-color: var(--petshop-primary);
-  box-shadow: 0 0 0 0.2rem rgba(74, 144, 164, 0.15);
+  box-shadow: 0 0 0 0.2rem rgba(164, 125, 74, 0.15);
 }
 
 /* Botão principal — sobrescreve o btn-primary padrão do Bootstrap */
@@ -60,11 +56,18 @@ body {
 }
 
 header {
+position: sticky; 
+ top: 0;          
+ z-index: 1000;   
+ background-color: #fde3d0; 
+  width: 100%;            
+ box-sizing: border-box; ++7/;
+
  display: flex;
  align-items: center;
  justify-content: space-between;
  padding: 20px 50px;
- color: #4a90a4;
+ color: #ff8800;
 }
 
 nav ul {
@@ -76,9 +79,7 @@ nav ul {
 }
 
 nav a {
-  color: #3a7385;
+  color: #ff8800;
   text-decoration: none;
   font-weight: bold;
 }
-
-/*nav a:hover {}/*
