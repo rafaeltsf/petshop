@@ -40,33 +40,45 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/veterinarios', async (req, res) => {
   const { nome, cfmv, especialidade } = req.body;
 
-  if (!nome || !cfmv || !especialidade) {
-    return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
+  if (!nome || !cfmv) {
+    return res.status(400).json({ message: 'Nome e CFMV são obrigatórios.' });
   }
 
-  const cfmvExists = await prisma.user.findUnique({ where: { cfmv } });
-        if (cfmvExists) {
-            return res.status(400).json({ message: "CFMV já cadastrado." });
-        }
+  try {
+    const veterinario = await prisma.veterinario.create({
+      data: { nome, cfmv, especialidade: especialidade || null },
+    });
+    res.status(201).json(veterinario);
+  } catch (err) {
+    if (err.code === 'P2002') {
+      return res.status(409).json({ message: 'Já existe um veterinário com esse CFMV.' });
+    }
+    res.status(500).json({ message: 'Erro ao cadastrar veterinário.' });
+  }
+});
 
-        const newUser = await prisma.veterinarios.create({
-            data: { nome, cfmv, especialidade }
-        });
+app.post('/api/pets', async (req, res) => {
+  const { nome, especie, raca, dataNascimento, peso, sexo, observacoes } = req.body;
+
+  if (!nome || !especie) {
+    return res.status(400).json({ message: 'Nome e espécie são obrigatórios.' });
+  }
 
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
-
-    if (!user || user.password !== senha) {
-      return res.status(401).json({ message: 'E-mail ou senha inválidos.' });
-    }
-
-    const { password, ...usuarioSemSenha } = user;
-
-    res.json({ message: 'Login realizado com sucesso!', usuario: usuarioSemSenha });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erro no servidor.' });
+    const pet = await prisma.pet.create({
+      data: {
+        nome,
+        especie,
+        raca: raca || null,
+        dataNascimento: dataNascimento ? new Date(dataNascimento) : null,
+        peso: peso ? parseFloat(peso) : null,
+        sexo: sexo || null,
+        observacoes: observacoes || null,
+      },
+    });
+    res.status(201).json(pet);
+  } catch (err) {
+    res.status(500).json({ message: 'Erro ao cadastrar pet.' });
   }
 });
 
